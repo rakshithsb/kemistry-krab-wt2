@@ -26,6 +26,9 @@
 
       <div class="jumbotron" style="background: rgba(0,255,255, 0.5);">
         <img src='/static/images/kem.png'/>
+		{% if signup %}
+		<p> Sign up Successful! Login to Continue </p>
+		{% endif %}
         <form class="form-signin" action="/validateLogin" method="post">
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>

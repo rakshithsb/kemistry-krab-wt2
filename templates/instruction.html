@@ -6,14 +6,56 @@
   
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
  
+
+
 </head>
  
-<body style ="background-image: url('/static/images/krusty_krab.jpg');background-size: cover;">
-  
- 
-</br>
-</br>
-    
+<body style ="background-image: url('/static/images/krusty_krab.jpg');background-size: cover;" onload="setInterval(get_gif,5000)">
+	  <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" ><a href="/">Home</a></li>
+            <li role="presentation" ><a href="/showSignIn">Sign In</a></li>
+            <li role="presentation" ><a href="/showSignUp">Sign Up</a></li>
+          </ul>
+        </nav>
+      </div>  
+ 		
+	
+     <div class="jumbotron d-flex align-items-center"  style="background: rgba(0,255,255, 0.5);">
+		<div class="container justify-content-center"	>
+		<img  src ='/static/images/1.gif' id="gif-container" height=250 width=250  />
+		
+			<p >Spongebob loves Gary</p>
+			<p >Gary loves Food</p>
+			<p >Help Spongebob earn $$ at the Kemistry Krab to feed Gary!</p>
+		
+			
+	</div>
+	</div>
+	<script>
+		function get_gif(){
+			var container = document.getElementById("gif-container");
+			xhr= new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(this.readyState == 4 && this.status == 200){
+					container.src = this.responseText;
+				}			
+ 	      	 };
+				
+				xhr.open("GET", "http://localhost:5000/intro_gif", true);
+				xhr.setRequestHeader('cache-control', 'no-cache, must-revalidate, post-check=0, pre-check=0');
+				xhr.setRequestHeader('cache-control', 'max-age=0');
+				xhr.setRequestHeader('expires', '0');
+				xhr.setRequestHeader('expires', 'Tue, 01 Jan 1980 1:00:00 GMT');
+				xhr.setRequestHeader('pragma', 'no-cache');
+ 		       	xhr.send();
+ 		    };
+			
+
+
+	</script>
 </body>
  
 </html>

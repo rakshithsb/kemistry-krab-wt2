@@ -1,5 +1,5 @@
 from contextlib import closing
-from flask import Flask, render_template, json, request, redirect, session
+from flask import Flask, render_template, json, request, redirect, session, send_file
 from flaskext.mysql import MySQL
 from werkzeug import generate_password_hash, check_password_hash
 
@@ -9,8 +9,8 @@ app.secret_key = 'spooky action at a distance-Einstein'
 
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '1324'
-app.config['MYSQL_DATABASE_DB'] = 'Project'
+app.config['MYSQL_DATABASE_PASSWORD'] = ''
+app.config['MYSQL_DATABASE_DB'] = 'FlaskBlogApp'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
@@ -24,7 +24,7 @@ def showSignUp():
 
 @app.route('/showSignin')
 def showSignin():
-    return render_template('signin.html')
+    return render_template('signin.html', signup= False)
 
 @app.route('/userHome')
 def userHome():
@@ -88,7 +88,7 @@ def signUp():
 
                 if len(data) is 0:
                     conn.commit()
-                    return json.dumps({'message':'User created successfully !'})
+                    return render_template('signin.html',signup= True)
                 else:
                     return json.dumps({'error':str(data[0])})
         else:
@@ -100,6 +100,17 @@ def signUp():
 @app.route('/instruction')
 def instruction():
 	return render_template('instruction.html')
+
+g_intro_count = 0
+file_names= ['1.gif','2.gif','3.gif']
+
+@app.route('/intro_gif',methods=['GET'])
+def intro_gif():	
+	global g_intro_count
+	global file_names
+	filename = file_names[g_intro_count % 3]
+	g_intro_count += 1
+	return '/static/images/'+filename
 	
 
 if __name__ == "__main__":
