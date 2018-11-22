@@ -97,5 +97,10 @@ def signUp():
     except Exception as e:
         return json.dumps({'error':str(e)})
 
+@app.route('/instruction')
+def instruction():
+	return render_template('instruction.html')
+	
+
 if __name__ == "__main__":
     app.run(port=5000)
