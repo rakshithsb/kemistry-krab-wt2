@@ -3,7 +3,8 @@
  
 <head>
     <title>Kemistry Krab</title>
-  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style>
             .margin {
@@ -43,15 +44,38 @@
                 <a href="#" class="card-text btn btn-lg  btn-primary btn-block margin" id="1" onclick="check_answer('1')">1</a>
                 <a href="#" class="card-text btn btn-lg btn-primary btn-block" id="2" onclick="check_answer('2')">2</a>
                 <a href="#" class="card-text btn btn-lg btn-primary btn-block" id="3" onclick="check_answer('3')">3</a>
-                <a href="#" class="card-text btn btn-lg btn-primary btn-block" id="4" onclick="check_answer('4')">4</a>
+                <a href="<p>Some text in the modal.</p>#" class="card-text btn btn-lg btn-primary btn-block" id="4" onclick="check_answer('4')">4</a>
                 <br>
             </div>
         </div>
     
+                    
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content"  style ="background-image: url('/static/images/floral.jpeg');background-size: cover;">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title" id="modalh" style="color:blue;">Gary is Happy!</h3>
+                    </div>
+                    <div class="modal-body">
+                    <img src="" id = "modalimg" height=200 width=200 style="margin-left:150px;">
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
     
 
 </body>
 <script>
+        var rights = 0;
+        var wrongs = 0;
         var question_count = -1;
         var data_arr = NaN;
         var counter = 0;
@@ -60,13 +84,11 @@
            
             if(this.readyState == 4 && this.status == 200){
                     data_arr = JSON.parse(this.responseText);
-                     console.log("data:"+data_arr);
                      put_data();    
                 }		
             
         }
     function start(){
-        console.log("start");
         xhr.open("GET", "http://localhost:5000/quiz_info?question_count="+question_count, true);
         question_count = question_count + 1;
         xhr.send();
@@ -100,10 +122,24 @@
 
     function check_answer(id){
         if(id == data_arr[counter]['r']){
-            console.log('right answer!');
+            rights = rights + 1;
+            if(rights % (counter+2) == 0){
+                $("#modalimg").attr('src', "/static/images/happy.gif");
+                $("#modalh").text("Gary is Happy!");
+                $("#myModal").modal();
+                console.log("Gary is happy!");
+            }
         }
         else{
-            console.log(":(");
+           wrongs = wrongs + 1;
+           if(wrongs > 3){
+               question_count = -1;
+               wrongs = 0;
+               $("#modalimg").attr('src', "/static/images/sad.gif");
+               $("#modalh").text("Gary is Sad!");
+                $("#myModal").modal();
+                console.log("Gary is sad!");
+           }
         }
         counter = counter + 1;
         put_data();
