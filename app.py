@@ -34,7 +34,7 @@ def userHome():
     print()
     #print("session.get('user')",session.get('user'))
     if session.get('user'):
-        return render_template('userHome.html', user=session['user'])
+        return render_template('home.html', user=session['user'])
     else:
         return  redirect("/")
 

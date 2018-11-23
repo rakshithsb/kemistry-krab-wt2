@@ -5,7 +5,19 @@
     <title>Python Flask Blog App</title>
   
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
- 
+    <style>
+            .margin {
+                margin-top: 5px;
+                margin-left:200px;
+                margin-bottom: 15px;
+                margin-right:0px;
+            }
+            .margin1 {
+                margin-top: 5px;
+                margin-bottom: 25px;
+            }
+     
+            </style>
 </head>
  
 <body style ="background-image: url('/static/images/krusty_krab.jpg');background-size: cover;">
@@ -14,12 +26,14 @@
 </br>
 </br>
    
-    <div class="container">
+    <div class="container" style="background-repeat: no-repeat;background-position: right; background-color:aqua; background: rgba(0,255,255, 0.8);box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);">
    
-        <div class="jumbotron" style ="background-image: url('/static/images/krabs.gif'); background-repeat: no-repeat;background-position: right; background-color:aqua;">
-            <img src='/static/images/kem.png'/>
+        <div class="jumbotron" style ="background: rgba(0,255,255, 0.0);">
+            <img class="margin"src='/static/images/kem.png'/>
+            <img  class="margin1" src= '/static/images/krabs.gif' style="float:right"/>
             <p class="lead"></p>
-            </br>
+            <br/>
+        <br/><br/>    
             <p><a class="btn btn-lg btn-success" href="showSignUp" role="button">Sign Up</a>&nbsp;&nbsp;
             <a class="btn btn-lg btn-success" href="showSignIn" role="button" style='background-color:blue;'>Sign In</a>&nbsp;&nbsp;
             <a class="btn btn-lg btn-success" href="instruction" role="button" style="background-color:red; text-align: center;">Instructions</a>

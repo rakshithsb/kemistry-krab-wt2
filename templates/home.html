@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f1f1f1;
+    padding: 20px;
+    font-family: Arial;
+}
+
+/* Center website */
+.main {
+    max-width: 1000px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 50px;
+    word-break: break-all;
+}
+
+.row {
+    margin: 10px -16px;
+}
+
+/* Add padding BETWEEN each column */
+.row,
+.row > .column {
+    padding: 8px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+    display: none; /* Hide all elements by default */
+}
+
+/* Clear floats after rows */ 
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Content */
+.content {
+    background-color: white;
+    padding: 10px;
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: block;
+}
+
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Lobster', cursive;
+    background-color: #eee;    
+}
+
+/* Gallery */
+
+.gallery {
+    position: relative;
+    width: 600px;
+    max-width: 800px;
+}
+.gallery h1 {
+    display: inline-block;
+    font-size: 2.2em;
+    padding: 10px;
+    color: #333;
+}
+.gallery ol {
+    list-style: none;
+    width: inherit;
+}
+.gallery li {
+    position: relative;
+    width: inherit;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+}
+.gallery li:nth-child(1) {
+    background-image: url(/static/images/s1.jpeg);  
+}
+.gallery li:nth-child(2) {
+    background-image: url(/static/images/p-block-elements.png);
+}
+.gallery li:nth-child(3) {
+    background-image: url(/static/images/d_f.jpg);
+}
+.gallery a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px 15px;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+}
+.info h3 {
+    font-size: 2em;
+}
+.info p {
+    font-size: 0.9em;
+}
+
+/* Viewport >= 420px */
+
+@media screen and (min-width: 420px) {
+    .gallery li {
+        height: 400px;
+    }
+}
+
+/* Viewport >= 620px */
+
+@media screen and (min-width: 620px) {
+    .gallery li {
+        float: left;
+        width: 50%;
+    }
+    .gallery li:first-child {
+        width: 100%;
+    }
+}
+
+/* Viewport >= 800px */
+
+@media screen and (min-width: 800px) {
+    .gallery {
+        margin: 50px auto 0;
+    } 
+    .gallery ol {
+        height: 300px;
+    }
+    .gallery li {
+        width: 200px;
+        height: 200px;
+        -webkit-transition: -webkit-transform 500ms ease;
+        transition: -webkit-transform 500ms ease;
+        transition: transform 500ms ease;
+        transition: transform 500ms ease, -webkit-transform 500ms ease;
+    }
+    .gallery li:first-child {
+        width: 200px;
+        height: 200px;
+    }
+    .gallery li:hover {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+        z-index: 5;
+    }
+    .gallery a {
+        -webkit-transition: background-color 500ms ease;
+        transition: background-color 500ms ease;
+    }
+    .gallery a:hover {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .info h3 {
+        font-size: 1.2em;
+    }
+    .margin {
+    margin-top: 40px;
+    margin-bottom: 15px;
+    margin-left: 150px;
+    margin-right: auto;
+}
+}
+</style>
+
+    <title>Home Page</title>
+   
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../static/css/signup.css" rel="stylesheet">
+    <script src="../static/js/jquery-1.11.2.js"></script>
+      
+  </head>
+
+  <body style ="background-image: url('/static/images/krusty_krab.jpg');background-size: cover;">
+
+    <div class="container" >
+      <div class="header" >
+
+        <nav >
+          
+
+          <ul class="nav nav-pills pull-right" >
+            <li role="presentation"><h4 >Welcome {{user}}&nbsp;</h4></li>  
+            <li role="presentation" ><a href="/logout">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="jumbotron" style ="background-repeat: no-repeat;background-position: right; background-color:aqua; background: rgba(0,255,255, 0.8);box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);">
+        
+       	<div class="row">
+	  <section class="gallery">
+  <ol>
+    <li>
+      <a href="/static/images/s.png" target="_blank">
+        <div class="info">
+          <h3>S-block Elements</h3>
+        </div>    
+      </a>
+    </li>
+    <li>
+      <a href="/static/images/p.jpeg" target="_blank">
+        <div class="info">
+          <h3>P-block Elements</h3>
+        </div>    
+      </a>
+    </li>
+    <li>
+      <a href="/static/images/d_f.png" target="_blank">
+        <div class="info">
+          <h3>D and F elements</h3>
+        </div>    
+      </a>
+    </li>
+    <img  class="margin" src="/static/images/feed1.png">
+    
+</ol>
+</section>
+  
+ <!-- END GRID -->
+	</div>
+
+      </div>      
+
+    </div>
+    <script>
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("column");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);     
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+
+
+</script>
+
+  </body>
+</html>
