@@ -7,10 +7,16 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
  <link href="/static/css/signup.css" rel="stylesheet">
 
+<style>
+.margin {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 
+</style>
 </head>
  
-<body style ="background-image: url('/static/images/krusty_krab.jpg');background-size: cover;" onload="setInterval(get_gif,5000)">
+<body style ="background-image: url('/static/images/krusty_krab.jpg');background-size: cover;" onload="setInterval(get_gif,3000)">
 	  <div class="container">
       <div class="header">
         <nav>
@@ -22,15 +28,17 @@
         </nav>
       </div>  
  		
-	
-     <div class="jumbotron d-flex align-items-center"  style="background: rgba(0,255,255, 0.5);">
-		<div class="container justify-content-center"	>
-		<img  src ='/static/images/1.gif' id="gif-container" height=250 width=250  />
-		
-			<p >Spongebob loves Gary</p>
-			<p >Gary loves Food</p>
-			<p >Help Spongebob earn $$ at the Kemistry Krab to feed Gary!</p>
-		
+	 <div class="margin" style="background: rgba(0,255,255, 0.8);float:left;" height=300 width=300>
+		<div class="margin container row" 	>
+		<img class="col-sm-6" src ='/static/images/1.gif' id="gif-container"  height=300 width=150 />
+		<div class="col-sm-6" >
+			<br/>
+			<br/>
+			<img src="/static/images/instructions.png">
+			<br/>
+			<br/>
+    
+		</div>
 			
 	</div>
 	</div>

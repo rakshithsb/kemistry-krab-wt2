@@ -2,11 +2,12 @@ from contextlib import closing
 from flask import Flask, render_template, json, request, redirect, session, send_file
 from flaskext.mysql import MySQL
 from werkzeug import generate_password_hash, check_password_hash
+from flask_cors import CORS, cross_origin
 
 mysql = MySQL()
 app = Flask(__name__)
 app.secret_key = 'spooky action at a distance-Einstein'
-
+CORS(app)
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = '1324'
@@ -22,7 +23,7 @@ def main():
 def showSignUp():
     return render_template('signup.html')
 
-@app.route('/showSignin')
+@app.route('/showSignIn')
 def showSignin():
     return render_template('signin.html', signup= False)
 
