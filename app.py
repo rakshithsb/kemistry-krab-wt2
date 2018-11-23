@@ -15,6 +15,7 @@ app.config['MYSQL_DATABASE_DB'] = 'Project'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
+_name = ""
 @app.route('/')
 def main():
     return render_template('index.html')
@@ -29,10 +30,14 @@ def showSignin():
 
 @app.route('/userHome')
 def userHome():
+    global _name
+    print()
+    #print("session.get('user')",session.get('user'))
     if session.get('user'):
-        return render_template('userHome.html')
+        return render_template('userHome.html', user=session['user'])
     else:
-        return render_template('error.html',error = 'Unauthorized Access')
+        return  redirect("/")
+
 
 @app.route('/logout')
 def logout():
@@ -56,7 +61,7 @@ def validateLogin():
         
         if len(data) > 0:
             if (str(data[0][3]),_password):
-                session['user'] = data[0][0]
+                session['user'] = data[0][1]
                 return redirect('/userHome')
             else:
                 return render_template('error.html',error = 'Wrong Email address or Password.')
