@@ -44,7 +44,7 @@
                 <a href="#" class="card-text btn btn-lg  btn-primary btn-block margin" id="1" onclick="check_answer('1')">1</a>
                 <a href="#" class="card-text btn btn-lg btn-primary btn-block" id="2" onclick="check_answer('2')">2</a>
                 <a href="#" class="card-text btn btn-lg btn-primary btn-block" id="3" onclick="check_answer('3')">3</a>
-                <a href="<p>Some text in the modal.</p>#" class="card-text btn btn-lg btn-primary btn-block" id="4" onclick="check_answer('4')">4</a>
+                <a href="#" class="card-text btn btn-lg btn-primary btn-block" id="4" onclick="check_answer('4')">4</a>
                 <br>
             </div>
         </div>
@@ -101,27 +101,39 @@
             counter = 0;
             start();
         }
+
+        var bucket = [];
+
+    for (var i=1;i<=4;i++) {
+        bucket.push(i);
+    }
+
+    function getRandomFromBucket() {
+    var randomIndex = Math.floor(Math.random()*bucket.length);
+    return bucket.splice(randomIndex, 1)[0];
+    }
        
         var q = document.getElementById("question");
         q.innerText =  data_arr[counter]["q"];
 
         var op1 = document.getElementById("1");
-        op1.innerText =  data_arr[counter][1];
+        op1.innerText =  data_arr[counter][getRandomFromBucket()];
 
         var op2 = document.getElementById("2");
-        op2.innerText =  data_arr[counter][2];
+        op2.innerText =  data_arr[counter][getRandomFromBucket()];
 
         var op3 = document.getElementById("3");
-        op3.innerText =  data_arr[counter][3];
+        op3.innerText =  data_arr[counter][getRandomFromBucket()];
 
         var op4 = document.getElementById("4");
-        op4.innerText =  data_arr[counter][4];
+        op4.innerText =  data_arr[counter][getRandomFromBucket()];
         
 
     }
 
     function check_answer(id){
-        if(id == data_arr[counter]['r']){
+        var ans = document.getElementById(id).innerHTML;
+        if(ans == data_arr[counter][data_arr[counter]['r']]){
             rights = rights + 1;
             if(rights % (counter+2) == 0){
                 $("#modalimg").attr('src', "/static/images/happy.gif");

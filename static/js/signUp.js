@@ -6,10 +6,10 @@ $(function() {
             data: $('form').serialize(),
             type: 'POST',
             success: function(response) {
-                window.document.innerHTML = response;
+                document.body.parentElement.innerHTML  = response;
             },
             error: function(error) {
-                window.document.innerHTML = response;
+                document.body.parentElement.innerHTML  = response;
             }
         });
     });

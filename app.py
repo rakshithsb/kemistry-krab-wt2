@@ -29,7 +29,11 @@ def showSignUp():
 
 @app.route('/showSignIn')
 def showSignin():
-    return render_template('signin.html', signup= False)
+    if request.args.get('signup'):
+        sgn = True
+    else:
+        sgn = False
+    return render_template('signin.html', signup= sgn)
 
 @app.route('/userHome')
 def userHome():
@@ -60,10 +64,9 @@ def validateLogin():
         data = cursor.fetchall()
         #print("Data",check_password_hash(str(data[0][3])))
         print("_password",_password)
-        
-        
+        print(data[0])
         if len(data) > 0:
-            if (str(data[0][3]),_password):
+            if (str(data[0][3])==_password):
                 session['user'] = data[0][1]
                 return redirect('/userHome')
             else:
@@ -96,8 +99,7 @@ def signUp():
                     data = cursor.fetchall()
 
                 if len(data) is 0:
-                    conn.commit()
-                    return render_template('signin.html',signup= True)
+                    return redirect("/showSignIn?signup=true")
                 else:
                     return render_template('error.html',error = str(data[0]))
         else:
