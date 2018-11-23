@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Unauthorized Access:: Flask Blog App</title>
+    <title>Unauthorized Access</title>
   
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/signup.css" rel="stylesheet">
        
   </head>
 
-  <body>
+  <body style ="background-image: url('/static/images/krusty_krab.jpg');background-size: cover;">
 
     <div class="container">
       <div class="header">
         <nav>
            <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="/showSignin">Sign In</a></li>
+            <li role="presentation"><a href="/showSignIn">Sign In</a></li>
  	    <li role="presentation"><a href="/showSignUp">Sign Up</a></li>
           </ul>
         </nav>
-        <img src="/static/images/Flask_Icon.png" alt="Flask_Icon.png"/ >
       </div>
 
-      <div class="jumbotron">
+      <div class="jumbotron" style ="background-repeat: no-repeat;background-position: right; background-color:aqua; background: rgba(0,255,255, 0.8);box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);">
         <h1>{{error}}</h1>        
       </div>
       
-      <footer class="footer">
-        <p>&copy;etaman.com 2017</p>
-      </footer>
-
+   
     </div>
   </body>
 </html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>Kemistry Krab</title>
+  
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+            .margin {
+                margin-top: 5px;
+                margin-left:10;
+                margin-bottom: 5px;
+                margin-right:10px;
+            }
+            
+     
+            </style>
+</head>
+ 
+<body style ="background-image: url('/static/images/krusty_krab.jpg');background-size: cover;" onload="start()">
+  
+    <div class="container" >
+            <div class="header" >
+      
+              <nav >
+                
+      
+                <ul class="nav nav-pills pull-right" >
+                  <li role="presentation"><h4 >{{user}}&nbsp;</h4></li>  
+                  <li role="presentation" ><a href="/userHome">Home</a></li>                  
+                  <li role="presentation" ><a href="/logout">Logout</a></li>
+                </ul>
+              </nav>
+            </div>
+<br>
+<br>
+<br>
+<br>
+        <div class="card centered" style="width:400px;margin-left:350px;box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);">
+                
+            <div class="card-body" style="width:200px;margin-left:100px;margin-bottom:50px;">
+                    <h4 id="question" class="card-title text-center" >Question</h4><br>
+                <a href="#" class="card-text btn btn-lg  btn-primary btn-block margin" id="1" onclick="check_answer('1')">1</a>
+                <a href="#" class="card-text btn btn-lg btn-primary btn-block" id="2" onclick="check_answer('2')">2</a>
+                <a href="#" class="card-text btn btn-lg btn-primary btn-block" id="3" onclick="check_answer('3')">3</a>
+                <a href="#" class="card-text btn btn-lg btn-primary btn-block" id="4" onclick="check_answer('4')">4</a>
+                <br>
+            </div>
+        </div>
+    
+    
+
+</body>
+<script>
+
+        var data_arr = NaN;
+        var counter = 0;
+        xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function (){
+           
+            if(this.readyState == 4 && this.status == 200){
+                    data_arr = JSON.parse(this.responseText);
+                     console.log("data:"+data_arr);
+                     put_data();    
+                }		
+            
+        }
+    function start(){
+        console.log("start");
+        xhr.open("GET", "http://localhost:5000/quiz_info", true);
+        xhr.send();
+    }
+
+    function put_data()
+    {
+        if(counter >= data_arr.length){
+            counter = 0;
+            start();
+        }
+       
+        var q = document.getElementById("question");
+        q.innerText =  data_arr[counter]["q"];
+
+        var op1 = document.getElementById("1");
+        op1.innerText =  data_arr[counter][1];
+
+        var op2 = document.getElementById("2");
+        op2.innerText =  data_arr[counter][2];
+
+        var op3 = document.getElementById("3");
+        op3.innerText =  data_arr[counter][3];
+
+        var op4 = document.getElementById("4");
+        op4.innerText =  data_arr[counter][4];
+        
+
+    }
+
+    function check_answer(id){
+        if(id == data_arr[counter]['r']){
+            console.log('right answer!');
+        }
+        else{
+            console.log(":(");
+        }
+        counter = counter + 1;
+        put_data();
+       
+    }
+    
+    </script>
+
+</html>

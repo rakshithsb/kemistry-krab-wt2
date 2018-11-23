@@ -1,5 +1,5 @@
 from contextlib import closing
-from flask import Flask, render_template, json, request, redirect, session, send_file
+from flask import Flask, render_template, json, request, redirect, session, send_file, jsonify
 from flaskext.mysql import MySQL
 from werkzeug import generate_password_hash, check_password_hash
 from flask_cors import CORS, cross_origin
@@ -12,8 +12,8 @@ app.secret_key = 'spooky action at a distance-Einstein'
 CORS(app)
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '1324'
-app.config['MYSQL_DATABASE_DB'] = 'Project'
+app.config['MYSQL_DATABASE_PASSWORD'] = ''
+app.config['MYSQL_DATABASE_DB'] = 'FlaskBlogApp'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
@@ -99,9 +99,9 @@ def signUp():
                     conn.commit()
                     return render_template('signin.html',signup= True)
                 else:
-                    return json.dumps({'error':str(data[0])})
+                    return render_template('error.html',error = str(data[0]))
         else:
-            return json.dumps({'html':'<span>Enter the required fields</span>'})
+            return render_template('error.html',error = 'Enter the required fields')
 
     except Exception as e:
         return json.dumps({'error':str(e)})
@@ -120,25 +120,35 @@ def intro_gif():
 	filename = file_names[g_intro_count % 3]
 	g_intro_count += 1
 	return '/static/images/'+filename
-	
-s = sched.scheduler(time.time, time.sleep)
-def send(): 
-	server = smtplib.SMTP('smtp.gmail.com', 587)
-	server.starttls()
-	server.login("rakshith.s.budihal@gmail.com", "Your Password")
- 
-	msg = "Test1!"
-	server.sendmail("rakshith.s.budihal@gmail.com", "rakshith.s.budihal@gmail.com", msg)
-	server.quit()
 
-def print_some_times():
-	print ("time1",time.time())
-	s.enter(5, 1, send, ())
-	s.enter(8, 1, send, ())
-	s.run()
-	print ("time2",time.time())
+@app.route('/quiz')
+def quiz_page():
+    return render_template('quiz.html', user = session['user'])
+
+@app.route('/quiz_info', methods=['GET'])
+def quiz():
+    questions = [{"q":"Easy Question 1",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2}, {"q":"Easy Question 2",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2},
+    {"q":"Easy Question 3",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2}]
+    return jsonify(questions)
+
+# s = sched.scheduler(time.time, time.sleep)
+# def send(): 
+# 	server = smtplib.SMTP('smtp.gmail.com', 587)
+# 	server.starttls()
+# 	server.login("rakshith.s.budihal@gmail.com", "Your Password")
+ 
+# 	msg = "Test1!"
+# 	server.sendmail("rakshith.s.budihal@gmail.com", "rakshith.s.budihal@gmail.com", msg)
+# 	server.quit()
+
+# def print_some_times():
+# 	print ("time1",time.time())
+# 	s.enter(5, 1, send, ())
+# 	s.enter(8, 1, send, ())
+# 	s.run()
+# 	print ("time2",time.time())
 	
-print_some_times()
+# print_some_times()
 
 if __name__ == "__main__":
     app.run(port=5000)
