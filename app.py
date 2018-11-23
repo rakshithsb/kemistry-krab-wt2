@@ -99,6 +99,7 @@ def signUp():
                     data = cursor.fetchall()
 
                 if len(data) is 0:
+                    conn.commit()
                     return redirect("/showSignIn?signup=true")
                 else:
                     return render_template('error.html',error = str(data[0]))
