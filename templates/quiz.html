@@ -52,7 +52,7 @@
 
 </body>
 <script>
-
+        var question_count = -1;
         var data_arr = NaN;
         var counter = 0;
         xhr = new XMLHttpRequest();
@@ -67,8 +67,10 @@
         }
     function start(){
         console.log("start");
-        xhr.open("GET", "http://localhost:5000/quiz_info", true);
+        xhr.open("GET", "http://localhost:5000/quiz_info?question_count="+question_count, true);
+        question_count = question_count + 1;
         xhr.send();
+        
     }
 
     function put_data()

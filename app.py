@@ -125,10 +125,29 @@ def intro_gif():
 def quiz_page():
     return render_template('quiz.html', user = session['user'])
 
+
+
 @app.route('/quiz_info', methods=['GET'])
 def quiz():
+    if request.args.get('question_count'):
+        question_count = int(request.args.get('question_count'))
+    else:
+        question_count = None
+      
     questions = [{"q":"Easy Question 1",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2}, {"q":"Easy Question 2",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2},
-    {"q":"Easy Question 3",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2}]
+        {"q":"Easy Question 3",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2}]
+        
+    if question_count is not None:
+        if question_count > 1:
+            questions = [{"q":"Tough Question 1",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2}, {"q":"Tough Question 2",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2},
+            {"q":"Tough Question 3",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2}]
+        
+        elif question_count > 0:
+            questions = [{"q":"Medium Question 1",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2}, {"q":"MEdium Question 2",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2},
+            {"q":"Medium Question 3",1:"Wrong",2:"Right",3:"Incorrect",4:"False",'r':2}]
+            
+   
+      
     return jsonify(questions)
 
 # s = sched.scheduler(time.time, time.sleep)
