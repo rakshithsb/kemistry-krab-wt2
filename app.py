@@ -9,8 +9,8 @@ app.secret_key = 'spooky action at a distance-Einstein'
 
 # MySQL configurations
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
-app.config['MYSQL_DATABASE_DB'] = 'FlaskBlogApp'
+app.config['MYSQL_DATABASE_PASSWORD'] = '1324'
+app.config['MYSQL_DATABASE_DB'] = 'Project'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
