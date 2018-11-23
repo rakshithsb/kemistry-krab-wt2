@@ -1,23 +1,22 @@
-from flask import Flask
-from flask_mail import Mail, Message
+import smtplib
+import sched, time
+s = sched.scheduler(time.time, time.sleep)
+def send(): 
+	server = smtplib.SMTP('smtp.gmail.com', 587)
+	server.starttls()
+	server.login("rakshith.s.budihal@gmail.com", "7406848092")
+ 
+	msg = "Test!"
+	server.sendmail("rakshith.s.budihal@gmail.com", "rakshith.s.budihal@gmail.com", msg)
+	server.quit()
+	
+#send()
 
-app =Flask(__name__)
-mail=Mail(app)
-
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'rakshith.s.budihal@gmail.com'
-app.config['MAIL_PASSWORD'] = '9901005500'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
-
-@app.route("/")
-def index():
-   msg = Message('Hello', sender = 'rakshith.s.budihal@gmail.com', recipients = ['priyankbhandia@gmail.com'])
-   msg.body = "Hello Flask message sent from Flask-Mail"
-   mail.send(msg)
-   return "Sent"
-
-if __name__ == '__main__':
-   app.run(debug = True)
+def print_some_times():
+	print (time.time())
+	s.enter(5, 1, send, ())
+	s.enter(8, 1, send, ())
+	s.run()
+	print (time.time())
+	
+print_some_times()

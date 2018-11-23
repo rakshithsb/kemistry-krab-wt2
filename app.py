@@ -3,6 +3,8 @@ from flask import Flask, render_template, json, request, redirect, session, send
 from flaskext.mysql import MySQL
 from werkzeug import generate_password_hash, check_password_hash
 from flask_cors import CORS, cross_origin
+import smtplib
+import sched, time
 
 mysql = MySQL()
 app = Flask(__name__)
@@ -14,6 +16,7 @@ app.config['MYSQL_DATABASE_PASSWORD'] = '1324'
 app.config['MYSQL_DATABASE_DB'] = 'Project'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
+
 
 _name = ""
 @app.route('/')
@@ -118,6 +121,24 @@ def intro_gif():
 	g_intro_count += 1
 	return '/static/images/'+filename
 	
+s = sched.scheduler(time.time, time.sleep)
+def send(): 
+	server = smtplib.SMTP('smtp.gmail.com', 587)
+	server.starttls()
+	server.login("rakshith.s.budihal@gmail.com", "Your Password")
+ 
+	msg = "Test1!"
+	server.sendmail("rakshith.s.budihal@gmail.com", "rakshith.s.budihal@gmail.com", msg)
+	server.quit()
+
+def print_some_times():
+	print ("time1",time.time())
+	s.enter(5, 1, send, ())
+	s.enter(8, 1, send, ())
+	s.run()
+	print ("time2",time.time())
+	
+print_some_times()
 
 if __name__ == "__main__":
     app.run(port=5000)
